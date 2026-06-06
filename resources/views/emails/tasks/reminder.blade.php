@@ -1,18 +1,20 @@
 <x-mail::message>
-# Task Deadline Reminder
+# DailyWin Task Reminder
 
-This is a friendly reminder that your task **{{ $task->title }}** is due on **{{ $task->formatted_due_date }}**.
+Your task **{{ $task->title }}** is due on **{{ $task->formatted_due_date }}**.
 
-**Description:**
-{{ $task->description }}
+<x-mail::panel>
+**Status:** {{ str_replace('_', ' ', $task->status->value) }}  
+**Priority:** {{ ucfirst($task->priority->value) }}  
+**Assigned To:** {{ $task->assignee?->name ?? 'Unassigned' }}
+</x-mail::panel>
 
-**Status:** {{ $task->status->value }}
-**Priority:** {{ $task->priority->value }}
+{{ $task->description ?: 'No description provided.' }}
 
-<x-mail::button :url="route("tasks.show", $task)">
+<x-mail::button :url="route('tasks.show', $task)">
 View Task
 </x-mail::button>
 
-Thanks,
-{{ config("app.name") }}
+Thanks,  
+{{ config('app.name') }}
 </x-mail::message>

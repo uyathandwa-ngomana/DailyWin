@@ -5,13 +5,14 @@ use App\Http\Controllers\AdminControllerAZU;
 use App\Http\Controllers\CategoryControllerAZU;
 use App\Http\Controllers\DashboardControllerAZU;
 use App\Http\Controllers\TaskControllerAZU;
+use App\Http\Controllers\UserControllerAZU;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', DashboardControllerAZU::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', DashboardControllerAZU::class)->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,12 +22,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware(["auth", "verified"])->group(function () {
+Route::middleware(["auth"])->group(function () {
     Route::patch('tasks/{task}/status', [TaskControllerAZU::class, 'updateStatus'])->name('tasks.update-status');
     Route::resource('tasks', TaskControllerAZU::class);
 
     Route::middleware('role:admin')->group(function () {
         Route::get('admin', [AdminControllerAZU::class, 'index'])->name('admin.index');
         Route::resource('categories', CategoryControllerAZU::class)->except('show');
+        Route::resource('users', UserControllerAZU::class);
     });
 });
