@@ -1,29 +1,54 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div>
+            <p class="text-sm font-semibold text-primary">My account</p>
+            <h1 class="text-3xl font-extrabold">Profile Settings</h1>
+            <p class="mt-xs text-on-surface-variant">Manage your account information and security preferences.</p>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+    <div class="grid gap-lg px-gutter pb-xl md:px-xl xl:grid-cols-3">
+        <div class="space-y-lg xl:col-span-2">
+            <div class="dw-card p-lg">
+                @include('profile.partials.update-profile-information-form')
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
+            <div class="dw-card p-lg">
+                @include('profile.partials.update-password-form')
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+            <div class="dw-card border-error-container p-lg">
+                @include('profile.partials.delete-user-form')
             </div>
         </div>
+
+        <aside class="space-y-lg">
+            <div class="rounded-xl bg-primary-container p-lg text-on-primary-container shadow-sm">
+                <div class="flex items-center gap-sm">
+                    <span class="material-symbols-outlined">verified_user</span>
+                    <h2 class="font-bold">Account Status</h2>
+                </div>
+                <dl class="mt-md space-y-sm text-sm">
+                    <div class="flex justify-between border-b border-white/20 pb-sm">
+                        <dt class="opacity-80">Role</dt>
+                        <dd class="font-semibold">{{ str_replace('_', ' ', $user->role->value) }}</dd>
+                    </div>
+                    <div class="flex justify-between">
+                        <dt class="opacity-80">Email services</dt>
+                        <dd class="font-semibold">Reminder ready</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="dw-card p-lg">
+                <h2 class="font-bold">Quick Links</h2>
+                <div class="mt-md grid gap-sm">
+                    <a href="{{ route('dashboard') }}" class="dw-button-secondary">Dashboard</a>
+                    @if (!Auth::user()->isGuest())
+                        <a href="{{ route('tasks.index') }}" class="dw-button-secondary">Tasks</a>
+                    @endif
+                </div>
+            </div>
+        </aside>
     </div>
 </x-app-layout>

@@ -1,61 +1,49 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" class="space-y-md">
         @csrf
 
-        <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <label for="name" class="dw-label">Full Name</label>
+            <input id="name" name="name" class="dw-input mt-xs" value="{{ old('name') }}" required autofocus autocomplete="name">
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+        <div>
+            <label for="email" class="dw-label">Email Address</label>
+            <input id="email" name="email" type="email" class="dw-input mt-xs" value="{{ old('email') }}" required autocomplete="username">
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="mt-4">
-            <x-input-label for="role" :value="__('Role')" />
-            <select id="role" name="role" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md shadow-sm" required>
+        <div>
+            <label for="role" class="dw-label">Role</label>
+            <select id="role" name="role" class="dw-input mt-xs" required>
                 <option value="team_member" @selected(old('role') === 'team_member')>Team Member</option>
                 <option value="guest" @selected(old('role') === 'guest')>Guest</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <div class="grid gap-md sm:grid-cols-2">
+            <div>
+                <label for="password" class="dw-label">Password</label>
+                <input id="password" name="password" type="password" class="dw-input mt-xs" required autocomplete="new-password">
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <div>
+                <label for="password_confirmation" class="dw-label">Confirm Password</label>
+                <input id="password_confirmation" name="password_confirmation" type="password" class="dw-input mt-xs" required autocomplete="new-password">
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            </div>
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="dw-button-primary w-full">
+            Create account
+            <span class="material-symbols-outlined">person_add</span>
+        </button>
     </form>
+
+    <div class="mt-lg border-t border-outline-variant pt-lg text-center">
+        <a href="{{ route('login') }}" class="text-sm font-semibold text-secondary hover:underline">Already registered? Log in</a>
+    </div>
 </x-guest-layout>

@@ -1,17 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Edit Task</h2>
+        <div>
+            <p class="text-sm font-semibold text-primary">Tasks</p>
+            <h1 class="text-3xl font-extrabold">Edit Task</h1>
+        </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <form method="POST" action="{{ route('tasks.update', $task) }}">
-                    @csrf
-                    @method('PUT')
-                    @include('tasks._form', ['buttonText' => 'Update Task'])
-                </form>
-            </div>
-        </div>
+    <div class="px-gutter pb-xl md:px-xl">
+        <form method="POST" action="{{ route('tasks.update', $task) }}">
+            @csrf
+            @method('PUT')
+            @include('tasks._form', ['buttonText' => 'Update Task'])
+        </form>
     </div>
 </x-app-layout>

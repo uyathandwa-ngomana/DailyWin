@@ -1,56 +1,74 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Admin Area</h2>
+        <div class="flex flex-col gap-md md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="text-sm font-semibold text-primary">Admin panel</p>
+                <h1 class="text-3xl font-extrabold">DailyWin Control Room</h1>
+                <p class="mt-xs text-on-surface-variant">Manage tasks, people, categories, and deadline readiness.</p>
+            </div>
+            @if (Route::has('users.index'))
+                <a href="{{ route('users.index') }}" class="dw-button-primary">
+                    <span class="material-symbols-outlined">group</span>
+                    Manage Users
+                </a>
+            @endif
+        </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="grid gap-4 sm:grid-cols-3">
-                <div class="bg-white dark:bg-gray-800 p-6 shadow-sm sm:rounded-lg">
-                    <p class="text-sm text-gray-500">Tasks</p>
-                    <p class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100">{{ $taskCount }}</p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 shadow-sm sm:rounded-lg">
-                    <p class="text-sm text-gray-500">Users</p>
-                    <p class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100">{{ $userCount }}</p>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 shadow-sm sm:rounded-lg">
-                    <p class="text-sm text-gray-500">Categories</p>
-                    <p class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100">{{ $categoryCount }}</p>
-                </div>
+    <div class="px-gutter pb-xl md:px-xl">
+        <div class="grid gap-md md:grid-cols-3">
+            <div class="rounded-xl border border-outline-variant bg-primary-container p-lg text-on-primary-container shadow-sm">
+                <p class="text-sm font-semibold opacity-80">Tasks</p>
+                <p class="mt-md text-4xl font-extrabold">{{ $taskCount }}</p>
             </div>
+            <div class="dw-card p-lg">
+                <p class="text-sm font-semibold text-on-surface-variant">Users</p>
+                <p class="mt-md text-4xl font-extrabold">{{ $userCount }}</p>
+            </div>
+            <div class="dw-card p-lg">
+                <p class="text-sm font-semibold text-on-surface-variant">Categories</p>
+                <p class="mt-md text-4xl font-extrabold">{{ $categoryCount }}</p>
+            </div>
+        </div>
 
-            <div class="grid gap-6 lg:grid-cols-2">
-                <div class="bg-white dark:bg-gray-800 p-6 shadow-sm sm:rounded-lg">
-                    <h3 class="font-semibold text-gray-900 dark:text-gray-100">Recent Tasks</h3>
-                    <div class="mt-4 space-y-3">
-                        @foreach ($tasks as $task)
-                            <a href="{{ route('tasks.show', $task) }}" class="block text-sm text-indigo-600 hover:text-indigo-900">{{ $task->title }}</a>
-                        @endforeach
-                    </div>
+        <div class="mt-lg grid gap-lg xl:grid-cols-3">
+            <section class="dw-card p-lg xl:col-span-2">
+                <h2 class="font-bold">Recent Tasks</h2>
+                <div class="mt-md space-y-sm">
+                    @forelse ($tasks as $task)
+                        <a href="{{ route('tasks.show', $task) }}" class="flex items-center justify-between rounded-lg border border-outline-variant p-md hover:bg-surface-container-low">
+                            <span class="font-semibold">{{ $task->title }}</span>
+                            <span class="rounded-full px-sm py-xs text-xs {{ $task->priority_badge }}">{{ ucfirst($task->priority->value) }}</span>
+                        </a>
+                    @empty
+                        <p class="text-sm text-on-surface-variant">No tasks yet.</p>
+                    @endforelse
                 </div>
+            </section>
 
-                <div class="bg-white dark:bg-gray-800 p-6 shadow-sm sm:rounded-lg">
-                    <h3 class="font-semibold text-gray-900 dark:text-gray-100">Recent Users</h3>
-                    <div class="mt-4 space-y-3">
+            <aside class="space-y-lg">
+                <div class="dw-card p-lg">
+                    <h2 class="font-bold">Recent Users</h2>
+                    <div class="mt-md space-y-sm">
                         @foreach ($users as $user)
-                            <div class="text-sm text-gray-700 dark:text-gray-300">{{ $user->name }} - {{ str_replace('_', ' ', $user->role->value) }}</div>
+                            <div class="flex items-center justify-between rounded-lg bg-surface-container-low p-sm">
+                                <span class="font-semibold">{{ $user->name }}</span>
+                                <span class="text-xs text-on-surface-variant">{{ str_replace('_', ' ', $user->role->value) }}</span>
+                            </div>
                         @endforeach
                     </div>
                 </div>
-            </div>
 
-            <div class="bg-white dark:bg-gray-800 p-6 shadow-sm sm:rounded-lg">
-                <div class="flex items-center justify-between">
-                    <h3 class="font-semibold text-gray-900 dark:text-gray-100">Category Management</h3>
-                    <a href="{{ route('categories.index') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Manage categories</a>
+                <div class="dw-card p-lg">
+                    <h2 class="font-bold">Category Management</h2>
+                    <div class="mt-md flex flex-wrap gap-sm">
+                        @foreach ($categories as $category)
+                            <span class="rounded-full bg-surface-container-high px-sm py-xs text-sm">{{ $category->name }} ({{ $category->tasks_count }})</span>
+                        @endforeach
+                    </div>
+                    <a href="{{ route('categories.index') }}" class="dw-button-secondary mt-md w-full">Manage categories</a>
                 </div>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    @foreach ($categories as $category)
-                        <span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-800">{{ $category->name }} ({{ $category->tasks_count }})</span>
-                    @endforeach
-                </div>
-            </div>
+            </aside>
         </div>
     </div>
 </x-app-layout>
