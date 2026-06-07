@@ -240,7 +240,7 @@ Each step prepares the environment: dependencies are installed, environment vari
 
 - Deadline reminders are generated automatically for tasks due tomorrow.
 - For local testing, email output is written to `storage/logs/laravel.log` using the log mail driver.
-- To trigger reminders manually, run:
+- To trigger reminders manually, run:  
 
 ```bash
 php artisan tasks:send-reminders-azu
