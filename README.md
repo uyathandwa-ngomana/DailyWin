@@ -280,7 +280,7 @@ php artisan tasks:send-reminders-azu
 ![Task List](screenshots/Task%20List.png)
 
 ### Create Task Form
-![Create Task Form](screenshots/Create%20Task%20Form.png)
+![Create Task Form](screenshots/Create%20Task.png)
 
 ### User Management
 ![User Management](screenshots/User%20Management.png)
