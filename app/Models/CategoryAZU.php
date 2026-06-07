@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
+/**
+ * Category model representing task groupings.
+ *
+ * Categories are used to organize tasks into logical groups.
+ * Each category can be associated with multiple tasks.
+ */
 class CategoryAZU extends Model
 {
     use HasFactory;
@@ -30,6 +36,7 @@ class CategoryAZU extends Model
 
     protected static function booted(): void
     {
+        // Auto-generate slug if not manually provided.//
         static::saving(function (CategoryAZU $category): void {
             if (blank($category->slug)) {
                 $category->slug = Str::slug($category->name);
@@ -38,7 +45,7 @@ class CategoryAZU extends Model
     }
 
     /**
-     * The tasks that belong to the category.
+     * Get all tasks linked to this category.
      */
     public function tasks(): BelongsToMany
     {

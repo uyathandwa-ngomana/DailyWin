@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * Task model representing user tasks in the system.
+ *
+ * Handles task lifecycle including status, priority,
+ * assignments, categories, and query scopes.
+ */
 class TaskAZU extends Model
 {
     use HasFactory;
