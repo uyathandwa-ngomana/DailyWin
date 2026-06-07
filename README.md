@@ -268,7 +268,7 @@ php artisan tasks:send-reminders-azu
 - [x] Eloquent relationships, scopes, accessors, observers
 - [x] Database seeding with factories
 
-## 8. Screenshots
+## 8. Screenshots 
 
 ### Admin Dashboard
 ![Admin Dashboard](screenshots/Admin%20Dashboard.png)
