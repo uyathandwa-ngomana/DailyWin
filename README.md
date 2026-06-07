@@ -270,20 +270,11 @@ php artisan tasks:send-reminders-azu
 
 ## 8. Screenshots 
 
-### Admin Dashboard
-![Admin Dashboard](screenshots/Admin%20Dashboard.png)
-
-### Team Member Dashboard
-![Team Member Dashboard](screenshots/Team%20Member%20Dashboard.png)
-
-### Task List
-![Task List](screenshots/Task%20List.png)
-
-### Create Task Form
-![Create Task Form](screenshots/Create%20Task.png)
-
-### User Management
-![User Management](screenshots/User%20Management.png)
+![Admin Dashboard](screenshots/admin-dashboard.png)
+![Team Member Dashboard](screenshots/member-dashboard.png)
+![Task List](screenshots/task-list.png)
+![Create Task Form](screenshots/create-task.png)
+![User Management](screenshots/user-management.png)
 
 
 ## 9. Security Features
