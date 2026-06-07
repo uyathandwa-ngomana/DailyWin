@@ -240,7 +240,7 @@ Each step prepares the environment: dependencies are installed, environment vari
 
 - Deadline reminders are generated automatically for tasks due tomorrow.
 - For local testing, email output is written to `storage/logs/laravel.log` using the log mail driver.
-- To trigger reminders manually, run:
+- To trigger reminders manually, run:  
 
 ```bash
 php artisan tasks:send-reminders-azu
@@ -268,14 +268,22 @@ php artisan tasks:send-reminders-azu
 - [x] Eloquent relationships, scopes, accessors, observers
 - [x] Database seeding with factories
 
-## 8. Screenshots
+## 8. Screenshots 
 
-![Admin Dashboard](screenshots/admin-dashboard.png)
-![Team Member Dashboard](C:\Users\Amanda\OneDrive\Pictures\Screenshots/Screenshot 2026-06-07 181504)
-![Task List](screenshots/task-list.png)
-![Create Task Form](screenshots/create-task.png)
-![User Management](screenshots/user-management.png)
+### Admin Dashboard
+![Admin Dashboard](screenshots/Admin%20Dashboard.png)
 
+### Team Member Dashboard
+![Team Member Dashboard](screenshots/Team%20Member%20Dashboard.png)
+
+### Task List
+![Task List](screenshots/Task%20List.png)
+
+### Create Task Form
+![Create Task Form](screenshots/Create%20Task.png)
+
+### User Management
+![User Management](screenshots/User%20Management.png)
 
 ## 9. Security Features
 
